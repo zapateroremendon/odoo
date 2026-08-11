@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Clean up corrupted rating records -->
+        <function model="rating.rating" name="_cleanup_corrupted_anonymous_ratings"/>
+        
+    </data>
+</odoo>

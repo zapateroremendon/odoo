@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Override the main product rating display in website_sale -->
+        <template id="product_rating_override" inherit_id="website_sale.product" name="Product Rating Override" priority="99">
+            <xpath expr="//t[@t-call='portal_rating.rating_widget_stars_static']" position="replace">
+                <t t-call="portal_rating.rating_widget_stars_static">
+                    <!-- Use total_rating_avg and total_rating_count for correct display -->
+                    <t t-set="rating_avg" t-value="product.total_rating_avg"/>
+                    <t t-set="trans_text_plural">%s reviews</t>
+                    <t t-set="trans_text_singular">%s review</t>
+                    <t t-set="rating_count" t-value="(trans_text_plural if product.total_rating_count > 1 else trans_text_singular) % product.total_rating_count"/>
+                </t>
+            </xpath>
+        </template>
+
+        <!-- Override ALL product snippet templates for shop page -->
+        
+        <!-- Template 1: Classic Card with Add to Cart -->
+        <template id="shop_rating_override_1" inherit_id="website_sale.dynamic_filter_template_product_product_add_to_cart" name="Shop Rating Override 1" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 2: Classic Card - Detailed -->
+        <template id="shop_rating_override_2" inherit_id="website_sale.dynamic_filter_template_product_product_view_detail" name="Shop Rating Override 2" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 3: Image with price -->
+        <template id="shop_rating_override_3" inherit_id="website_sale.dynamic_filter_template_product_product_mini_price" name="Shop Rating Override 3" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 4: Image with name -->
+        <template id="shop_rating_override_4" inherit_id="website_sale.dynamic_filter_template_product_product_mini_name" name="Shop Rating Override 4" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 5: Centered Product -->
+        <template id="shop_rating_override_5" inherit_id="website_sale.dynamic_filter_template_product_product_centered" name="Shop Rating Override 5" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 6: Borderless Product 1 -->
+        <template id="shop_rating_override_6" inherit_id="website_sale.dynamic_filter_template_product_product_borderless_1" name="Shop Rating Override 6" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 7: Borderless Product 2 -->
+        <template id="shop_rating_override_7" inherit_id="website_sale.dynamic_filter_template_product_product_borderless_2" name="Shop Rating Override 7" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 8: Large Banner -->
+        <template id="shop_rating_override_8" inherit_id="website_sale.dynamic_filter_template_product_product_banner" name="Shop Rating Override 8" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 9: Horizontal Card -->
+        <template id="shop_rating_override_9" inherit_id="website_sale.dynamic_filter_template_product_product_horizontal_card" name="Shop Rating Override 9" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 10: Horizontal Card 2 -->
+        <template id="shop_rating_override_10" inherit_id="website_sale.dynamic_filter_template_product_product_horizontal_card_2" name="Shop Rating Override 10" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+        <!-- Template 11: Card Group -->
+        <template id="shop_rating_override_11" inherit_id="website_sale.dynamic_filter_template_product_product_card_group" name="Shop Rating Override 11" priority="99">
+            <xpath expr="//t[@t-set='rating_avg'][@t-value='record.rating_avg']" position="attributes">
+                <attribute name="t-value">record.total_rating_avg</attribute>
+            </xpath>
+            <xpath expr="//t[@t-set='rating_count'][@t-value='record.rating_count']" position="attributes">
+                <attribute name="t-value">record.total_rating_count</attribute>
+            </xpath>
+        </template>
+
+
+
+    </data>
+</odoo>
