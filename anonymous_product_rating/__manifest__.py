@@ -5,7 +5,7 @@
     'category': 'Website/eCommerce',
     'summary': 'Allow anonymous users to rate and comment on products with bot protection',
     'description': 'Anonymous Product Rating - Allow anonymous users to rate and comment on products with bot protection',
-    'author': 'Isidoro Roa Saavedra',
+    'author': 'Soft Tech Applied',
     'website': 'https://www.softtechlatam.cl',
     'live_test_url': 'https://www.softtechlatam.cl/probar-gratis',
     'support': 'isidororoa@softtechlatam.cl',
