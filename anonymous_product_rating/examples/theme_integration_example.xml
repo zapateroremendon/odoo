@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Example: Integration with default website_sale product page -->
+        <template id="example_product_page_integration" name="Example Product Page Integration" 
+                  inherit_id="website_sale.product" active="False">
+            <!-- Add rating summary after product info -->
+            <xpath expr="//div[@id='product_details']" position="after">
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <t t-call="anonymous_product_rating.compact_rating_widget"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+            
+            <!-- Add full rating section at the bottom -->
+            <xpath expr="//div[@id='product_full_description']" position="after">
+                <div class="container mt-5">
+                    <t t-call="anonymous_product_rating.product_rating_integration"/>
+                </div>
+            </xpath>
+        </template>
+        
+        <!-- Example: Integration with product cards in shop -->
+        <template id="example_product_card_integration" name="Example Product Card Integration" 
+                  inherit_id="website_sale.products_item" active="False">
+            <!-- Add rating badge to product cards -->
+            <xpath expr="//div[hasclass('product_price')]" position="after">
+                <div class="mt-2">
+                    <t t-call="anonymous_product_rating.rating_badge"/>
+                </div>
+            </xpath>
+        </template>
+        
+        <!-- Example: Custom theme integration -->
+        <template id="example_custom_theme_integration" name="Example Custom Theme Integration" active="False">
+            <div class="custom-product-reviews">
+                <div class="container">
+                    <div class="row">
+                        <!-- Left column: Rating form -->
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-primary text-white">
+                                    <h4 class="mb-0">
+                                        <i class="fa fa-star"></i> Share Your Experience
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <t t-call="anonymous_product_rating.enhanced_rating_form"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right column: Recent reviews -->
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-info text-white">
+                                    <h4 class="mb-0">
+                                        <i class="fa fa-comments"></i> What Customers Say
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="customRatingsContainer">
+                                        <div class="text-center">
+                                            <i class="fa fa-spinner fa-spin"></i> Loading reviews...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Example: Minimal integration for existing themes -->
+        <template id="example_minimal_integration" name="Example Minimal Integration" active="False">
+            <!-- Just add this anywhere in your product template -->
+            <div class="product-reviews-section py-4">
+                <div class="container">
+                    <!-- Rating summary -->
+                    <div class="text-center mb-4">
+                        <t t-call="anonymous_product_rating.safe_rating_display"/>
+                    </div>
+                    
+                    <!-- Quick rating form -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <t t-call="anonymous_product_rating.inline_rating_form"/>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent reviews -->
+                    <div class="mt-4">
+                        <h5 class="text-center mb-3">Recent Reviews</h5>
+                        <div id="minimalRatingsContainer">
+                            <!-- Reviews will be loaded here via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Example: Bootstrap 5 styled integration -->
+        <template id="example_bootstrap5_integration" name="Example Bootstrap 5 Integration" active="False">
+            <div class="product-reviews-bootstrap5">
+                <!-- Hero section with rating summary -->
+                <section class="bg-light py-5">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h2 class="display-6">Customer Reviews</h2>
+                                <p class="lead">See what our customers think about this product</p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <t t-call="anonymous_product_rating.safe_rating_display"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Rating form section -->
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="card border-0 shadow">
+                                    <div class="card-body p-4">
+                                        <t t-call="anonymous_product_rating.enhanced_rating_form"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Reviews display section -->
+                <section class="py-5 bg-light">
+                    <div class="container">
+                        <h3 class="text-center mb-5">What Our Customers Say</h3>
+                        <div id="bootstrap5RatingsContainer">
+                            <!-- Reviews loaded via AJAX -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </template>
+        
+    </data>
+</odoo>

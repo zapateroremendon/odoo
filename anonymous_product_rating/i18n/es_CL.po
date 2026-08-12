@@ -1,0 +1,899 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* anonymous_product_rating
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e-20250902\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-06 18:17+0000\n"
+"PO-Revision-Date: 2025-10-06 18:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.product_rating_override
+msgid "%s review"
+msgstr "%s comentario"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.product_rating_override
+msgid "%s reviews"
+msgstr "%s comentarios"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid ""
+"<small class=\"text-muted mt-1 d-block\">Click on a star to rate (1 = Poor, "
+"5 = Excellent)</small>"
+msgstr ""
+"<small class=\"text-muted mt-1 d-block\">Haz clic en una estrella para "
+"calificar (1 = Malo, 5 = Excelente)</small>"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_form_enhanced
+msgid "<span class=\"o_stat_text\">Moderate</span>"
+msgstr "<span class=\"o_stat_text\">Moderar</span>"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "All rating caches have been cleared"
+msgstr "Todas las cachés de calificaciones han sido limpiadas"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "All rating statistics have been recomputed"
+msgstr "Todas las estadísticas de calificaciones han sido recalculadas"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_product__allow_anonymous_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_template__allow_anonymous_rating
+msgid "Allow Anonymous Rating"
+msgstr "Permitir Calificación Anónima"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_product_product__allow_anonymous_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_product_template__allow_anonymous_rating
+msgid "Allow anonymous users to rate this product"
+msgstr "Permitir a usuarios anónimos calificar este producto"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "An error occurred while loading rating stats"
+msgstr "Ocurrió un error al cargar las estadísticas de calificaciones"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "An error occurred while loading ratings"
+msgstr "Ocurrió un error al cargar las calificaciones"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "An error occurred while submitting your rating"
+msgstr "Ocurrió un error al enviar tu calificación"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_rating_rating__anonymous_author_name
+msgid "Anonymous Author Name"
+msgstr "Nombre del Autor Anónimo"
+
+#. module: anonymous_product_rating
+#: model:ir.model,name:anonymous_product_rating.model_anonymous_rating
+msgid "Anonymous Product Rating"
+msgstr "Calificación Anónima de Producto"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Anonymous Product Ratings"
+msgstr "Calificaciones Anónimas de Productos"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_rating_rating__is_anonymous
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_form
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_form_enhanced
+msgid "Anonymous Rating"
+msgstr "Calificación Anónima"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_product__anonymous_rating_avg
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_template__anonymous_rating_avg
+msgid "Anonymous Rating Average"
+msgstr "Promedio de Calificaciones Anónimas"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_product__anonymous_rating_count
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_template__anonymous_rating_count
+msgid "Anonymous Rating Count"
+msgstr "Cantidad de Calificaciones Anónimas"
+
+#. module: anonymous_product_rating
+#: model:ir.model,name:anonymous_product_rating.model_anonymous_rating_performance_monitor
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Anonymous Rating Performance Monitor"
+msgstr "Monitor de Rendimiento de Calificaciones Anónimas"
+
+#. module: anonymous_product_rating
+#: model:ir.model,name:anonymous_product_rating.model_anonymous_rating_performance_report
+msgid "Anonymous Rating Performance Report"
+msgstr "Reporte de Rendimiento de Calificaciones Anónimas"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_rating_rating__anonymous_rating_id
+msgid "Anonymous Rating Reference"
+msgstr "Referencia de Calificación Anónima"
+
+#. module: anonymous_product_rating
+#: model:ir.actions.server,name:anonymous_product_rating.cron_auto_moderate_spam_ir_actions_server
+msgid "Anonymous Rating: Auto-moderate Spam"
+msgstr "Calificación Anónima: Auto-moderar Spam"
+
+#. module: anonymous_product_rating
+#: model:ir.actions.server,name:anonymous_product_rating.cron_cleanup_old_ratings_ir_actions_server
+msgid "Anonymous Rating: Cleanup Old Ratings"
+msgstr "Calificación Anónima: Limpiar Calificaciones Antiguas"
+
+#. module: anonymous_product_rating
+#: model:ir.actions.server,name:anonymous_product_rating.cron_clear_rating_caches_ir_actions_server
+msgid "Anonymous Rating: Clear Caches"
+msgstr "Calificación Anónima: Limpiar Cachés"
+
+#. module: anonymous_product_rating
+#: model:ir.actions.server,name:anonymous_product_rating.cron_sync_ratings_to_core_ir_actions_server
+msgid "Anonymous Rating: Sync to Core System"
+msgstr "Calificación Anónima: Sincronizar con Sistema Principal"
+
+#. module: anonymous_product_rating
+#: model:ir.actions.act_window,name:anonymous_product_rating.anonymous_rating_action
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_product__anonymous_rating_ids
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_template__anonymous_rating_ids
+#: model:ir.ui.menu,name:anonymous_product_rating.menu_anonymous_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_tree
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_tree_enhanced
+msgid "Anonymous Ratings"
+msgstr "Calificaciones Anónimas"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Anonymous rating not allowed for this product"
+msgstr "No se permite calificación anónima para este producto"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.actions.act_window,help:anonymous_product_rating.anonymous_rating_action
+msgid ""
+"Anonymous ratings will appear here when customers rate products without "
+"logging in."
+msgstr ""
+"Las calificaciones anónimas aparecerán aquí cuando los clientes califiquen "
+"productos sin iniciar sesión."
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Auto-moderate Spam"
+msgstr "Auto-moderar Spam"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__spam_threshold
+msgid "Auto-moderate Spam Threshold"
+msgstr "Umbral de Auto-moderación de Spam"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Auto-moderated %d spam ratings"
+msgstr "Se auto-moderaron %d calificaciones spam"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Auto-moderation Complete"
+msgstr "Auto-moderación Completada"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_res_config_settings__anonymous_rating_auto_publish
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Auto-publish Anonymous Ratings"
+msgstr "Auto-publicar Calificaciones Anónimas"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_res_config_settings__anonymous_rating_auto_publish
+msgid "Automatically publish anonymous ratings without moderation"
+msgstr "Publicar automáticamente calificaciones anónimas sin moderación"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__avg_response_time
+msgid "Average Response Time (ms)"
+msgstr "Tiempo de Respuesta Promedio (ms)"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__avg_spam_score
+msgid "Average Spam Score"
+msgstr "Puntuación Promedio de Spam"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Cache Cleared"
+msgstr "Caché Limpiada"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__cache_hit_ratio
+msgid "Cache Hit Ratio (%)"
+msgstr "Ratio de Aciertos de Caché (%)"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_anonymous_rating__spam_score
+msgid "Calculated spam probability score"
+msgstr "Puntuación calculada de probabilidad de spam"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Cleaned up %d old ratings"
+msgstr "Se limpiaron %d calificaciones antiguas"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Cleanup Complete"
+msgstr "Limpieza Completada"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Cleanup Old Ratings"
+msgstr "Limpiar Calificaciones Antiguas"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__cleanup_days
+msgid "Cleanup Old Ratings (days)"
+msgstr "Limpiar Calificaciones Antiguas (días)"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Cleanup days must be greater than 0"
+msgstr "Los días de limpieza deben ser mayor que 0"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Clear Caches"
+msgstr "Limpiar Cachés"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_report_form
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__feedback
+msgid "Comment"
+msgstr "Comentario"
+
+#. module: anonymous_product_rating
+#: model:ir.model,name:anonymous_product_rating.model_res_config_settings
+msgid "Configuration settings for Website Webkul Addons"
+msgstr "Ajustes de configuración"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_form_enhanced
+msgid "Content"
+msgstr "Contenido"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Content appears to be spam. Please review your submission."
+msgstr "El contenido parece ser spam. Por favor revisa tu envío."
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__create_uid
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__create_uid
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__create_date
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__create_date
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Current Statistics"
+msgstr "Estadísticas Actuales"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__db_query_count
+msgid "Database Queries (last hour)"
+msgstr "Consultas de Base de Datos (última hora)"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+msgid "Date"
+msgstr "Fecha"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__display_name
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__display_name
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__author_email
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Email (optional)"
+msgstr "Correo Electrónico (opcional)"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_res_config_settings__anonymous_rating_enable_moderation
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Enable Moderation"
+msgstr "Habilitar Moderación"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_res_config_settings__anonymous_rating_enable_moderation
+msgid "Enable moderation for anonymous ratings"
+msgstr "Habilitar moderación para calificaciones anónimas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Enable moderation queue for anonymous ratings"
+msgstr "Habilitar cola de moderación para calificaciones anónimas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Excellent - 5 stars"
+msgstr "Excelente - 5 estrellas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Fair - 2 stars"
+msgstr "Regular - 2 estrellas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_form
+msgid "Feedback"
+msgstr "Comentarios"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Good - 3 stars"
+msgstr "Bueno - 3 estrellas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_anonymous_rating__rating_hash
+msgid "Hash for duplicate detection and performance optimization"
+msgstr "Hash para detección de duplicados y optimización de rendimiento"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__spam_ratings
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__high_spam_ratings
+msgid "High Spam Score Ratings"
+msgstr "Calificaciones con Alta Puntuación de Spam"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__id
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__id
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__id
+msgid "ID"
+msgstr "ID"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__ip_address
+msgid "IP Address"
+msgstr "Dirección IP"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_anonymous_rating__synced_to_core
+msgid ""
+"Indicates if this anonymous rating has been synced to rating.rating model"
+msgstr ""
+"Indica si esta calificación anónima ha sido sincronizada al modelo rating."
+"rating"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/anonymous_rating.py:0
+#, python-format
+msgid "Invalid email format"
+msgstr "Formato de correo electrónico inválido"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Invalid product ID"
+msgstr "ID de producto inválido"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Invalid rating value"
+msgstr "Valor de calificación inválido"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Invalid request timestamp"
+msgstr "Marca de tiempo de solicitud inválida"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__write_uid
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__write_uid
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__write_date
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__write_date
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Limit the number of ratings per IP address within a time period"
+msgstr "Limitar el número de calificaciones por dirección IP dentro de un período de tiempo"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Maintenance Options"
+msgstr "Opciones de Mantención"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Max Ratings"
+msgstr "Máximo de Calificaciones"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_res_config_settings__anonymous_rating_max_per_period
+msgid "Max Ratings per Period"
+msgstr "Máximo de Calificaciones por Período"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_res_config_settings__anonymous_rating_max_per_period
+msgid "Maximum number of ratings allowed per IP in the rate limit period"
+msgstr "Número máximo de calificaciones permitidas por IP en el período de límite de velocidad"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Minimum Score"
+msgstr "Puntaje Mínimo"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_res_config_settings__anonymous_rating_recaptcha_min_score
+msgid "Minimum reCAPTCHA score required (0.0 to 1.0)"
+msgstr "Puntaje mínimo de reCAPTCHA requerido (0.0 a 1.0)"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid ""
+"Minimum reCAPTCHA score required (0.0 to 1.0). Higher scores mean less "
+"likely to be a bot"
+msgstr ""
+"Puntaje mínimo de reCAPTCHA requerido (0.0 a 1.0). Puntajes más altos "
+"significan menor probabilidad de ser un bot"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Missing required fields"
+msgstr "Faltan campos obligatorios"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__is_moderated
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+msgid "Moderated"
+msgstr "Moderado"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__moderated_by
+msgid "Moderated By"
+msgstr "Moderado Por"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_form
+msgid "Moderation"
+msgstr "Moderación"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__moderation_date
+msgid "Moderation Date"
+msgstr "Fecha de Moderación"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__moderation_reason
+msgid "Moderation Reason"
+msgstr "Razón de Moderación"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__author_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Name *"
+msgstr "Nombre *"
+
+#. module: anonymous_product_rating
+#: model:ir.model.constraint,message:anonymous_product_rating.constraint_anonymous_rating_name_not_empty
+msgid "Name cannot be empty"
+msgstr "El nombre no puede estar vacío"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Name is required and cannot be empty"
+msgstr "El nombre es obligatorio y no puede estar vacío"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.actions.act_window,help:anonymous_product_rating.anonymous_rating_action
+msgid "No anonymous ratings yet!"
+msgstr "¡Aún no hay calificaciones anónimas!"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.actions.act_window,help:anonymous_product_rating.rating_rating_action_standard
+msgid "No ratings yet!"
+msgstr "¡Aún no hay calificaciones!"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__pending_moderation
+msgid "Pending Moderation"
+msgstr "Pendiente de Moderación"
+
+#. module: anonymous_product_rating
+#: model:ir.actions.act_window,name:anonymous_product_rating.action_anonymous_rating_performance_monitor
+#: model:ir.ui.menu,name:anonymous_product_rating.menu_anonymous_rating_performance
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_monitor_form
+msgid "Performance Monitor"
+msgstr "Monitor de Rendimiento"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_report_form
+#, python-format
+msgid "Performance Report"
+msgstr "Reporte de Rendimiento"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Poor - 1 star"
+msgstr "Malo - 1 estrella"
+
+#. module: anonymous_product_rating
+#: model:ir.model,name:anonymous_product_rating.model_product_template
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+msgid "Product"
+msgstr "Producto"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__product_tmpl_id
+msgid "Product Template"
+msgstr "Plantilla de Producto"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Product not found"
+msgstr "Producto no encontrado"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__publication_rate
+msgid "Publication Rate (%)"
+msgstr "Tasa de Publicación (%)"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_form
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_form_enhanced
+msgid "Publish"
+msgstr "Publicar"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__is_published
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+msgid "Published"
+msgstr "Publicado"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__published_ratings
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__published_ratings
+msgid "Published Ratings"
+msgstr "Calificaciones Publicadas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_report_form
+msgid "Quality Metrics"
+msgstr "Métricas de Calidad"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_res_config_settings__anonymous_rating_rate_limit_hours
+msgid "Rate Limit Period (hours)"
+msgstr "Período de Límite de Velocidad (horas)"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Rate Limiting"
+msgstr "Limitación de Velocidad"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Rate limit exceeded. Please try again later."
+msgstr "Límite de velocidad excedido. Por favor intenta de nuevo más tarde."
+
+#. module: anonymous_product_rating
+#: model:ir.model,name:anonymous_product_rating.model_rating_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__rating
+msgid "Rating"
+msgstr "Calificación"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Rating *"
+msgstr "Calificación *"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__rating_hash
+msgid "Rating Hash"
+msgstr "Hash de Calificación"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_report_form
+msgid "Rating Statistics"
+msgstr "Estadísticas de Calificaciones"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#: model:ir.model.constraint,message:anonymous_product_rating.constraint_anonymous_rating_rating_range
+#, python-format
+msgid "Rating must be between 1 and 5"
+msgstr "La calificación debe estar entre 1 y 5"
+
+#. module: anonymous_product_rating
+#: model:ir.actions.act_window,name:anonymous_product_rating.rating_rating_action_standard
+#: model:ir.ui.menu,name:anonymous_product_rating.menu_ratings_section
+#: model:ir.ui.menu,name:anonymous_product_rating.menu_standard_ratings
+msgid "Ratings"
+msgstr "Calificaciones"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.actions.act_window,help:anonymous_product_rating.rating_rating_action_standard
+msgid "Ratings from registered users will appear here."
+msgstr "Las calificaciones de usuarios registrados aparecerán aquí."
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__recent_ratings
+msgid "Recent Ratings (7 days)"
+msgstr "Calificaciones Recientes (7 días)"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__report_date
+msgid "Report Date"
+msgstr "Fecha del Reporte"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Review"
+msgstr "Comentario"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Security verification failed. Please try again."
+msgstr "La verificación de seguridad falló. Por favor intenta de nuevo."
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Share your experience with this product..."
+msgstr "Comparte tu experiencia con este producto..."
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__spam_rate
+msgid "Spam Rate (%)"
+msgstr "Tasa de Spam (%)"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__spam_score
+msgid "Spam Score"
+msgstr "Puntuación de Spam"
+
+#. module: anonymous_product_rating
+#: model:ir.model.constraint,message:anonymous_product_rating.constraint_anonymous_rating_spam_score_range
+msgid "Spam score must be between 0 and 1"
+msgstr "La puntuación de spam debe estar entre 0 y 1"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Spam threshold must be between 0 and 1"
+msgstr "El umbral de spam debe estar entre 0 y 1"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/models/performance_monitor.py:0
+#, python-format
+msgid "Statistics Recomputed"
+msgstr "Estadísticas Recalculadas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Submit Review"
+msgstr "Enviar Comentario"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__synced_to_core
+msgid "Synced to Core Rating System"
+msgstr "Sincronizado al Sistema Principal de Calificaciones"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_form
+msgid "Technical Info"
+msgstr "Información Técnica"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_form_enhanced
+msgid "Technical Information"
+msgstr "Información Técnica"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Thank you for your rating!"
+msgstr "¡Gracias por tu calificación!"
+
+#. module: anonymous_product_rating
+#. odoo-python
+#: code:addons/anonymous_product_rating/controllers/main.py:0
+#, python-format
+msgid "Thank you for your rating! It will be published after moderation."
+msgstr "¡Gracias por tu calificación! Será publicada después de la moderación."
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "Time Period (hours)"
+msgstr "Período de Tiempo (horas)"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,help:anonymous_product_rating.field_res_config_settings__anonymous_rating_rate_limit_hours
+msgid "Time period for rate limiting (in hours)"
+msgstr "Período de tiempo para limitación de velocidad (en horas)"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_performance_report_form
+msgid "Top Products"
+msgstr "Productos Destacados"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__top_products_data
+msgid "Top Products Data"
+msgstr "Datos de Productos Destacados"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_product__total_rating_avg
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_template__total_rating_avg
+msgid "Total Rating Average"
+msgstr "Promedio Total de Calificaciones"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_product__total_rating_count
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_product_template__total_rating_count
+msgid "Total Rating Count"
+msgstr "Cantidad Total de Calificaciones"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_monitor__total_ratings
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating_performance_report__total_ratings
+msgid "Total Ratings"
+msgstr "Total de Calificaciones"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+msgid "Unmoderated"
+msgstr "Sin Moderar"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_form
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.view_anonymous_rating_form_enhanced
+msgid "Unpublish"
+msgstr "Despublicar"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_view_search
+msgid "Unpublished"
+msgstr "No Publicado"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__user_agent
+msgid "User Agent"
+msgstr "Agente de Usuario"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Very Good - 4 stars"
+msgstr "Muy Bueno - 4 estrellas"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid ""
+"When enabled, anonymous ratings will be published immediately without "
+"moderation"
+msgstr ""
+"Cuando esté habilitado, las calificaciones anónimas se publicarán "
+"inmediatamente sin moderación"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.anonymous_rating_modal
+msgid "Write a Review"
+msgstr "Escribir un Comentario"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_res_config_settings__anonymous_rating_recaptcha_min_score
+msgid "reCAPTCHA Minimum Score"
+msgstr "Puntaje Mínimo de reCAPTCHA"
+
+#. module: anonymous_product_rating
+#: model_terms:ir.ui.view,arch_db:anonymous_product_rating.res_config_settings_view_form_inherit
+msgid "reCAPTCHA Protection"
+msgstr "Protección reCAPTCHA"
+
+#. module: anonymous_product_rating
+#: model:ir.model.fields,field_description:anonymous_product_rating.field_anonymous_rating__recaptcha_token
+msgid "reCAPTCHA Token"
+msgstr "Token de reCAPTCHA"

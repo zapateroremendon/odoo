@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Simple integration template for existing product pages -->
+        <template id="product_rating_integration" name="Product Rating Integration">
+            <div class="anonymous-rating-integration">
+                <!-- Rating Summary -->
+                <div class="rating-summary-section mb-4">
+                    <h4>Customer Reviews</h4>
+                    <t t-call="anonymous_product_rating.safe_rating_display"/>
+                </div>
+                
+                <!-- Quick Rating Form -->
+                <div class="quick-rating-form mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fa fa-star"></i> Write a Review</h5>
+                        </div>
+                        <div class="card-body">
+                            <t t-call="anonymous_product_rating.anonymous_rating_form_with_images"/>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Reviews -->
+                <div class="recent-reviews-section">
+                    <h5>Recent Reviews</h5>
+                    <div id="recentRatingsContainer">
+                        <div class="text-center">
+                            <i class="fa fa-spinner fa-spin"></i> Loading reviews...
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="#" class="btn btn-outline-primary" id="viewAllReviews">
+                            View All Reviews
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Include image modal -->
+                <t t-call="anonymous_product_rating.rating_image_modal"/>
+            </div>
+        </template>
+        
+        <!-- Compact rating widget for product cards -->
+        <template id="compact_rating_widget" name="Compact Rating Widget">
+            <div class="compact-rating-widget">
+                <div class="d-flex align-items-center">
+                    <div class="rating-stars me-2">
+                        <t t-set="rating_avg" t-value="product.safe_rating_avg"/>
+                        <t t-foreach="range(1, 6)" t-as="star">
+                            <i t-att-class="'fa fa-star' + ('-o' if star > rating_avg else '') + ' text-warning'"></i>
+                        </t>
+                    </div>
+                    <span class="rating-text">
+                        <t t-if="product.safe_rating_count > 0">
+                            <strong t-esc="'%.1f' % product.safe_rating_avg"/>
+                            (<t t-esc="product.safe_rating_count"/> reviews)
+                        </t>
+                        <t t-else="">
+                            No reviews yet
+                        </t>
+                    </span>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Rating badge for product listings -->
+        <template id="rating_badge" name="Rating Badge">
+            <div class="rating-badge" t-if="product.safe_rating_count > 0">
+                <span class="badge bg-warning text-dark">
+                    <i class="fa fa-star"></i>
+                    <t t-esc="'%.1f' % product.safe_rating_avg"/>
+                    (<t t-esc="product.safe_rating_count"/>)
+                </span>
+            </div>
+        </template>
+        
+        <!-- Inline rating form (minimal) -->
+        <template id="inline_rating_form" name="Inline Rating Form">
+            <div class="inline-rating-form">
+                <form class="anonymous-rating-form" id="inlineRatingForm" enctype="multipart/form-data">
+                    <input type="hidden" name="product_id" t-att-value="product.id"/>
+                    
+                    <div class="row align-items-end">
+                        <div class="col-md-3">
+                            <label class="form-label small">Rating</label>
+                            <div class="rating-input">
+                                <t t-foreach="range(1, 6)" t-as="star">
+                                    <i class="fa fa-star-o rating-star" t-att-data-rating="star"></i>
+                                </t>
+                            </div>
+                            <input type="hidden" name="rating" required="required"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Name</label>
+                            <input type="text" class="form-control form-control-sm" name="author_name" required="required" maxlength="100"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small">Comment</label>
+                            <input type="text" class="form-control form-control-sm" name="feedback" maxlength="200" placeholder="Quick comment..."/>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary btn-sm w-100">
+                                <i class="fa fa-paper-plane"></i> Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </template>
+        
+    </data>
+</odoo>

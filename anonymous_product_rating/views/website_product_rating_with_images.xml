@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Complete product rating page with images -->
+        <template id="product_rating_page_with_images" name="Product Rating Page with Images">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <!-- Product Info -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <img t-att-src="product.image_1920 and '/web/image/product.template/%s/image_1920' % product.id or '/web/static/img/placeholder.png'" 
+                                                     class="img-fluid rounded" t-att-alt="product.name"/>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h2 t-esc="product.name"/>
+                                                <div class="rating-summary mb-3">
+                                                    <t t-call="anonymous_product_rating.safe_rating_display"/>
+                                                </div>
+                                                <p t-if="product.description_sale" t-esc="product.description_sale"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Rating Form -->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4><i class="fa fa-star"></i> Write a Review</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <t t-call="anonymous_product_rating.anonymous_rating_form_with_images"/>
+                                    </div>
+                                </div>
+                                
+                                <!-- Existing Ratings -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4><i class="fa fa-comments"></i> Customer Reviews</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="ratingsContainer">
+                                            <div class="text-center">
+                                                <i class="fa fa-spinner fa-spin"></i> Loading reviews...
+                                            </div>
+                                        </div>
+                                        <div id="loadMoreContainer" class="text-center mt-3" style="display: none;">
+                                            <button id="loadMoreBtn" class="btn btn-outline-primary">
+                                                <i class="fa fa-plus"></i> Load More Reviews
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sidebar -->
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5><i class="fa fa-info-circle"></i> Review Guidelines</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><i class="fa fa-check text-success"></i> Be honest and helpful</li>
+                                            <li><i class="fa fa-check text-success"></i> Focus on the product</li>
+                                            <li><i class="fa fa-check text-success"></i> Add photos if possible</li>
+                                            <li><i class="fa fa-times text-danger"></i> No spam or promotional content</li>
+                                            <li><i class="fa fa-times text-danger"></i> No personal information</li>
+                                        </ul>
+                                        <small class="text-muted">
+                                            Reviews are moderated and may take some time to appear.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Include image modal -->
+                <t t-call="anonymous_product_rating.rating_image_modal"/>
+            </t>
+        </template>
+        
+        <!-- Rating display component for AJAX loading -->
+        <template id="rating_list_with_images" name="Rating List with Images">
+            <div class="ratings-list">
+                <t t-foreach="ratings" t-as="rating">
+                    <t t-call="anonymous_product_rating.rating_item_with_images"/>
+                </t>
+                <div t-if="not ratings" class="text-center text-muted py-4">
+                    <i class="fa fa-comment-o fa-3x mb-3"></i>
+                    <p>No reviews yet. Be the first to review this product!</p>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Enhanced rating form with better UX -->
+        <template id="enhanced_rating_form" name="Enhanced Rating Form">
+            <div class="anonymous-rating-form">
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>Share your experience!</strong> Help other customers by writing an honest review.
+                </div>
+                
+                <form id="anonymousRatingForm" enctype="multipart/form-data">
+                    <input type="hidden" name="product_id" t-att-value="product.id"/>
+                    
+                    <!-- Rating Section -->
+                    <div class="rating-section mb-4">
+                        <h5>Overall Rating *</h5>
+                        <div class="rating-input mb-2">
+                            <t t-foreach="range(1, 6)" t-as="star">
+                                <i class="fa fa-star-o rating-star" t-att-data-rating="star"></i>
+                            </t>
+                        </div>
+                        <input type="hidden" name="rating" id="ratingValue" required="required"/>
+                        <small class="text-muted">Click to rate from 1 to 5 stars</small>
+                    </div>
+                    
+                    <!-- Personal Info Section -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="authorName" class="form-label">Your Name *</label>
+                            <input type="text" class="form-control" id="authorName" name="author_name" 
+                                   required="required" maxlength="100" placeholder="Enter your name"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="authorEmail" class="form-label">Email (optional)</label>
+                            <input type="email" class="form-control" id="authorEmail" name="author_email" 
+                                   maxlength="100" placeholder="your@email.com"/>
+                            <small class="text-muted">We'll never share your email</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Review Text -->
+                    <div class="mb-4">
+                        <label for="feedback" class="form-label">Your Review</label>
+                        <textarea class="form-control" id="feedback" name="feedback" rows="4" 
+                                  maxlength="1000" placeholder="Tell us about your experience with this product..."></textarea>
+                        <div class="form-text">
+                            <span id="charCount">0</span>/1000 characters
+                        </div>
+                    </div>
+                    
+                    <!-- Photo Upload Section -->
+                    <div class="mb-4">
+                        <h5>Add Photos (optional)</h5>
+                        <p class="text-muted mb-3">
+                            <i class="fa fa-camera"></i> 
+                            Help others by showing the product in use. You can upload up to 3 photos.
+                        </p>
+                        <div class="image-upload-container">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="image-upload-box">
+                                        <input type="file" class="form-control-file" id="image1" name="image_1" accept="image/*"/>
+                                        <label for="image1" class="image-upload-label">
+                                            <i class="fa fa-camera"></i>
+                                            <span>Add Photo 1</span>
+                                        </label>
+                                        <div class="image-preview" id="preview1"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="image-upload-box">
+                                        <input type="file" class="form-control-file" id="image2" name="image_2" accept="image/*"/>
+                                        <label for="image2" class="image-upload-label">
+                                            <i class="fa fa-camera"></i>
+                                            <span>Add Photo 2</span>
+                                        </label>
+                                        <div class="image-preview" id="preview2"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="image-upload-box">
+                                        <input type="file" class="form-control-file" id="image3" name="image_3" accept="image/*"/>
+                                        <label for="image3" class="image-upload-label">
+                                            <i class="fa fa-camera"></i>
+                                            <span>Add Photo 3</span>
+                                        </label>
+                                        <div class="image-preview" id="preview3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="form-text text-muted">
+                                <i class="fa fa-info-circle"></i>
+                                Supported formats: JPG, PNG, GIF, WebP. Maximum size: 5MB per image.
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Section -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fa fa-paper-plane"></i> Submit Review
+                        </button>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                By submitting, you agree to our review guidelines
+                            </small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </template>
+        
+    </data>
+</odoo>

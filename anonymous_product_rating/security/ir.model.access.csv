@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_anonymous_rating_public,anonymous.rating.public,anonymous_product_rating.model_anonymous_rating,,1,0,0,0
+access_anonymous_rating_user,anonymous.rating.user,anonymous_product_rating.model_anonymous_rating,base.group_user,1,1,1,0
+access_anonymous_rating_manager,anonymous.rating.manager,anonymous_product_rating.model_anonymous_rating,base.group_system,1,1,1,1
+access_performance_monitor_user,anonymous.rating.performance.monitor.user,anonymous_product_rating.model_anonymous_rating_performance_monitor,base.group_user,1,1,1,1
+access_performance_report_user,anonymous.rating.performance.report.user,anonymous_product_rating.model_anonymous_rating_performance_report,base.group_user,1,1,1,1

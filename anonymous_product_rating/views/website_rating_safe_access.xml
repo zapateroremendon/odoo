@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Safe snippet filter for product ratings -->
+        <template id="product_rating_snippet_safe" name="Product Rating Snippet Safe">
+            <t t-set="rating_avg" t-value="product.safe_rating_avg"/>
+            <t t-set="rating_count" t-value="product.safe_rating_count"/>
+            
+            <div class="product-rating-snippet" t-if="rating_count > 0">
+                <div class="d-flex align-items-center">
+                    <div class="o_rating_stars_container">
+                        <t t-call="portal_rating.rating_stars_static">
+                            <t t-set="rating_avg" t-value="rating_avg"/>
+                        </t>
+                    </div>
+                    <span class="ms-2">
+                        <t t-esc="'%.1f' % rating_avg"/> (<t t-esc="rating_count"/>)
+                    </span>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Safe rating display component -->
+        <template id="safe_rating_display" name="Safe Rating Display">
+            <div class="safe-rating-display">
+                <t t-set="rating_avg" t-value="product.safe_rating_avg"/>
+                <t t-set="rating_count" t-value="product.safe_rating_count"/>
+                
+                <t t-if="rating_count > 0">
+                    <div class="d-flex align-items-center">
+                        <div class="o_rating_stars_container">
+                            <t t-call="portal_rating.rating_stars_static">
+                                <t t-set="rating_avg" t-value="rating_avg"/>
+                            </t>
+                        </div>
+                        <span class="ms-2 text-muted">
+                            <t t-esc="'%.1f' % rating_avg"/> out of 5 (<t t-esc="rating_count"/> reviews)
+                        </span>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="text-muted">No reviews yet</div>
+                </t>
+            </div>
+        </template>
+        
+        <!-- Anonymous rating form with image upload -->
+        <template id="anonymous_rating_form_with_images" name="Anonymous Rating Form with Images">
+            <div class="anonymous-rating-form">
+                <form id="anonymousRatingForm" enctype="multipart/form-data">
+                    <input type="hidden" name="product_id" t-att-value="product.id"/>
+                    
+                    <!-- Rating stars -->
+                    <div class="mb-3">
+                        <label class="form-label">Rating *</label>
+                        <div class="rating-input">
+                            <t t-foreach="range(1, 6)" t-as="star">
+                                <i class="fa fa-star-o rating-star" t-att-data-rating="star"></i>
+                            </t>
+                        </div>
+                        <input type="hidden" name="rating" id="ratingValue" required="required"/>
+                    </div>
+                    
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="authorName" class="form-label">Name *</label>
+                        <input type="text" class="form-control" id="authorName" name="author_name" required="required" maxlength="100"/>
+                    </div>
+                    
+                    <!-- Email (optional) -->
+                    <div class="mb-3">
+                        <label for="authorEmail" class="form-label">Email (optional)</label>
+                        <input type="email" class="form-control" id="authorEmail" name="author_email" maxlength="100"/>
+                    </div>
+                    
+                    <!-- Comment -->
+                    <div class="mb-3">
+                        <label for="feedback" class="form-label">Comment</label>
+                        <textarea class="form-control" id="feedback" name="feedback" rows="4" maxlength="1000"></textarea>
+                    </div>
+                    
+                    <!-- Image uploads -->
+                    <div class="mb-3">
+                        <label class="form-label">Photos (optional, max 3)</label>
+                        <div class="image-upload-container">
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <div class="image-upload-box">
+                                        <input type="file" class="form-control-file" id="image1" name="image_1" accept="image/*"/>
+                                        <label for="image1" class="image-upload-label">
+                                            <i class="fa fa-camera"></i>
+                                            <span>Add Photo 1</span>
+                                        </label>
+                                        <div class="image-preview" id="preview1"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="image-upload-box">
+                                        <input type="file" class="form-control-file" id="image2" name="image_2" accept="image/*"/>
+                                        <label for="image2" class="image-upload-label">
+                                            <i class="fa fa-camera"></i>
+                                            <span>Add Photo 2</span>
+                                        </label>
+                                        <div class="image-preview" id="preview2"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="image-upload-box">
+                                        <input type="file" class="form-control-file" id="image3" name="image_3" accept="image/*"/>
+                                        <label for="image3" class="image-upload-label">
+                                            <i class="fa fa-camera"></i>
+                                            <span>Add Photo 3</span>
+                                        </label>
+                                        <div class="image-preview" id="preview3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="form-text text-muted">
+                                Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB per image.
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit button -->
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-paper-plane"></i> Submit Review
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </template>
+        
+        <!-- Rating display with images -->
+        <template id="rating_item_with_images" name="Rating Item with Images">
+            <div class="rating-item mb-4">
+                <!-- Rating header -->
+                <div class="rating-header d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <div class="rating-stars">
+                            <t t-call="portal_rating.rating_stars_static">
+                                <t t-set="rating_avg" t-value="rating.rating"/>
+                            </t>
+                        </div>
+                        <strong t-esc="rating.author_name"/>
+                        <small class="text-muted ms-2" t-esc="rating.create_date"/>
+                    </div>
+                </div>
+                
+                <!-- Rating comment -->
+                <div class="rating-content mb-2" t-if="rating.feedback">
+                    <p t-esc="rating.feedback"/>
+                </div>
+                
+                <!-- Rating images -->
+                <div class="rating-images" t-if="rating.has_images">
+                    <div class="row">
+                        <div class="col-auto" t-if="rating.image_1_small">
+                            <img t-att-src="'data:image/png;base64,' + rating.image_1_small" 
+                                 class="rating-image-thumb img-thumbnail" 
+                                 alt="Review image 1"
+                                 data-bs-toggle="modal" 
+                                 data-bs-target="#imageModal"
+                                 style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;"/>
+                        </div>
+                        <div class="col-auto" t-if="rating.image_2_small">
+                            <img t-att-src="'data:image/png;base64,' + rating.image_2_small" 
+                                 class="rating-image-thumb img-thumbnail" 
+                                 alt="Review image 2"
+                                 data-bs-toggle="modal" 
+                                 data-bs-target="#imageModal"
+                                 style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;"/>
+                        </div>
+                        <div class="col-auto" t-if="rating.image_3_small">
+                            <img t-att-src="'data:image/png;base64,' + rating.image_3_small" 
+                                 class="rating-image-thumb img-thumbnail" 
+                                 alt="Review image 3"
+                                 data-bs-toggle="modal" 
+                                 data-bs-target="#imageModal"
+                                 style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Image modal for full-size viewing -->
+        <template id="rating_image_modal" name="Rating Image Modal">
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel">Review Image</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img id="modalImage" src="" class="img-fluid" alt="Review image"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+    </data>
+</odoo>

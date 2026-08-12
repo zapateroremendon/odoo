@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Extend Website Settings -->
+        <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.anonymous.rating</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//app[@name='website']" position="inside">
+                    <block title="Anonymous Product Ratings" id="anonymous_rating_settings">
+                        <setting id="anonymous_rating_auto_publish_setting" string="Auto-publish Anonymous Ratings" help="When enabled, anonymous ratings will be published immediately without moderation">
+                            <field name="anonymous_rating_auto_publish"/>
+                        </setting>
+                        <setting id="anonymous_rating_moderation_setting" string="Enable Moderation" help="Enable moderation queue for anonymous ratings">
+                            <field name="anonymous_rating_enable_moderation"/>
+                        </setting>
+                        <setting id="anonymous_rating_rate_limit_setting" string="Rate Limiting" help="Limit the number of ratings per IP address within a time period">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" string="Time Period (hours)" for="anonymous_rating_rate_limit_hours"/>
+                                    <field name="anonymous_rating_rate_limit_hours"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" string="Max Ratings" for="anonymous_rating_max_per_period"/>
+                                    <field name="anonymous_rating_max_per_period"/>
+                                </div>
+                            </div>
+                        </setting>
+                        <setting id="anonymous_rating_recaptcha_setting" string="reCAPTCHA Protection" help="Minimum reCAPTCHA score required (0.0 to 1.0). Higher scores mean less likely to be a bot">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" string="Minimum Score" for="anonymous_rating_recaptcha_min_score"/>
+                                    <field name="anonymous_rating_recaptcha_min_score"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

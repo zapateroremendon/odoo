@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Rating Count Synchronization Fix -->
+        <template id="rating_count_sync" inherit_id="website_sale.product" name="Rating Count Sync" priority="100">
+            <xpath expr="//div[@id='wrap']" position="inside">
+                <script type="text/javascript">
+                    (function() {
+                        'use strict';
+                        
+                        const totalCount = <t t-esc="product.rating_count"/>;
+                        
+                        function syncRatingDisplays() {
+                            // Sync review count in rating links
+                            document.querySelectorAll('small.text-muted').forEach(function(el) {
+                                if (el.textContent &amp;&amp; el.textContent.includes('review')) {
+                                    const text = totalCount === 1 ? 'review' : 'reviews';
+                                    el.textContent = `(${totalCount} ${text})`;
+                                }
+                            });
+                            
+                            // Sync message counter
+                            document.querySelectorAll('.o_message_count').forEach(function(el) {
+                                el.textContent = ' ' + totalCount;
+                            });
+                        }
+                        
+                        // Initial sync and monitor for dynamic content
+                        setTimeout(syncRatingDisplays, 200);
+                        setTimeout(syncRatingDisplays, 1000);
+                        
+                        const observer = new MutationObserver(function(mutations) {
+                            mutations.forEach(function(mutation) {
+                                mutation.addedNodes.forEach(function(node) {
+                                    if (node.nodeType === 1 &amp;&amp; (
+                                        node.classList?.contains('o_message_counter') ||
+                                        node.querySelector?.('.o_message_counter')
+                                    )) {
+                                        setTimeout(syncRatingDisplays, 100);
+                                    }
+                                });
+                            });
+                        });
+                        
+                        observer.observe(document.body, { childList: true, subtree: true });
+                    })();
+                </script>
+            </xpath>
+        </template>
+
+        <!-- Anonymous Rating Modal -->
+        <template id="anonymous_rating_modal" name="Anonymous Rating Modal">
+            <div class="modal fade" id="anonymousRatingModal" tabindex="-1" aria-labelledby="anonymousRatingModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" style="max-height: 90vh;">
+                    <div class="modal-content" style="max-height: 90vh;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="anonymousRatingModalLabel">Write a Review</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="anonymous_rating_form" enctype="multipart/form-data">
+                            <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+                                <input type="hidden" id="product_id" name="product_id" t-att-value="product.id"/>
+                                
+                                <!-- Rating Stars -->
+                                <div class="mb-3">
+                                    <label class="form-label">Rating *</label>
+                                    <div class="star-rating">
+                                        <input type="radio" id="star5" name="rating" value="5"/>
+                                        <label for="star5" title="Excellent - 5 stars">★</label>
+                                        <input type="radio" id="star4" name="rating" value="4"/>
+                                        <label for="star4" title="Very Good - 4 stars">★</label>
+                                        <input type="radio" id="star3" name="rating" value="3"/>
+                                        <label for="star3" title="Good - 3 stars">★</label>
+                                        <input type="radio" id="star2" name="rating" value="2"/>
+                                        <label for="star2" title="Fair - 2 stars">★</label>
+                                        <input type="radio" id="star1" name="rating" value="1"/>
+                                        <label for="star1" title="Poor - 1 star">★</label>
+                                    </div>
+                                    <small class="text-muted mt-1 d-block">Click on a star to rate (1 = Poor, 5 = Excellent)</small>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="mb-3">
+                                    <label for="author_name" class="form-label">Name *</label>
+                                    <input type="text" class="form-control" id="author_name" name="author_name" required="required" maxlength="100"/>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="author_email" class="form-label">Email (optional)</label>
+                                    <input type="email" class="form-control" id="author_email" name="author_email" maxlength="100"/>
+                                </div>
+
+                                <!-- Comment -->
+                                <div class="mb-3">
+                                    <label for="feedback" class="form-label">Review</label>
+                                    <textarea class="form-control" id="feedback" name="feedback" rows="4" maxlength="1000" placeholder="Share your experience with this product..."></textarea>
+                                </div>
+
+                                <!-- Image Upload -->
+                                <div class="mb-3">
+                                    <label class="form-label">Photos (optional, max 3)</label>
+                                    <div class="image-upload-container">
+                                        <div class="row">
+                                            <div class="col-4 mb-2">
+                                                <div class="image-upload-box" style="border: 2px dashed #dee2e6; border-radius: 8px; padding: 10px; text-align: center; min-height: 70px; position: relative;">
+                                                    <input type="file" class="form-control-file" id="image1" name="image_1" accept="image/*" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;"/>
+                                                    <label for="image1" class="image-upload-label" style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; cursor: pointer; margin: 0;">
+                                                        <i class="fa fa-camera" style="font-size: 1.2rem; margin-bottom: 4px;"></i>
+                                                        <span style="font-size: 0.7rem;">Photo 1</span>
+                                                    </label>
+                                                    <div class="image-preview" id="preview1" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 6px; overflow: hidden; display: none;">
+                                                        <img style="width: 100%; height: 100%; object-fit: cover;"/>
+                                                        <button type="button" class="remove-image" style="position: absolute; top: 5px; right: 5px; background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <div class="image-upload-box" style="border: 2px dashed #dee2e6; border-radius: 8px; padding: 10px; text-align: center; min-height: 70px; position: relative;">
+                                                    <input type="file" class="form-control-file" id="image2" name="image_2" accept="image/*" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;"/>
+                                                    <label for="image2" class="image-upload-label" style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; cursor: pointer; margin: 0;">
+                                                        <i class="fa fa-camera" style="font-size: 1.2rem; margin-bottom: 4px;"></i>
+                                                        <span style="font-size: 0.7rem;">Photo 2</span>
+                                                    </label>
+                                                    <div class="image-preview" id="preview2" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 6px; overflow: hidden; display: none;">
+                                                        <img style="width: 100%; height: 100%; object-fit: cover;"/>
+                                                        <button type="button" class="remove-image" style="position: absolute; top: 5px; right: 5px; background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <div class="image-upload-box" style="border: 2px dashed #dee2e6; border-radius: 8px; padding: 10px; text-align: center; min-height: 70px; position: relative;">
+                                                    <input type="file" class="form-control-file" id="image3" name="image_3" accept="image/*" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;"/>
+                                                    <label for="image3" class="image-upload-label" style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; cursor: pointer; margin: 0;">
+                                                        <i class="fa fa-camera" style="font-size: 1.2rem; margin-bottom: 4px;"></i>
+                                                        <span style="font-size: 0.7rem;">Photo 3</span>
+                                                    </label>
+                                                    <div class="image-preview" id="preview3" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 6px; overflow: hidden; display: none;">
+                                                        <img style="width: 100%; height: 100%; object-fit: cover;"/>
+                                                        <button type="button" class="remove-image" style="position: absolute; top: 5px; right: 5px; background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            <i class="fa fa-info-circle"></i>
+                                            Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB per image.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Error/Success Messages -->
+                                <div id="rating_message" class="alert" style="display: none;"></div>
+                            </div>
+                            <div class="modal-footer" style="flex-shrink: 0;">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="submit_rating_btn">Submit Review</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Star Rating CSS -->
+        <template id="star_rating_css" inherit_id="website_sale.product" name="Star Rating CSS" priority="98">
+            <xpath expr="//div[@id='wrap']" position="inside">
+                <style>
+                    /* Star Rating Styles */
+                    .star-rating {
+                        display: flex;
+                        flex-direction: row-reverse;
+                        justify-content: flex-end;
+                        gap: 5px;
+                        margin: 10px 0;
+                    }
+                    
+                    .star-rating input[type="radio"] {
+                        display: none;
+                    }
+                    
+                    .star-rating label {
+                        font-size: 2rem;
+                        color: #ddd;
+                        cursor: pointer;
+                        transition: color 0.2s ease-in-out;
+                        user-select: none;
+                        line-height: 1;
+                        margin: 0;
+                        padding: 0 2px;
+                    }
+                    
+                    .star-rating label:hover,
+                    .star-rating label:hover ~ label {
+                        color: #ffc107;
+                        transform: scale(1.1);
+                    }
+                    
+                    .star-rating input[type="radio"]:checked ~ label {
+                        color: #ffc107;
+                    }
+                    
+                    .star-rating input[type="radio"]:checked ~ label:hover,
+                    .star-rating input[type="radio"]:checked ~ label:hover ~ label {
+                        color: #ffb300;
+                    }
+                    
+                    /* Mobile responsive */
+                    @media (max-width: 768px) {
+                        .star-rating label {
+                            font-size: 1.8rem;
+                            padding: 0 1px;
+                        }
+                        
+                        .modal-dialog {
+                            margin: 10px;
+                            max-width: calc(100% - 20px);
+                        }
+                        
+                        .modal-body {
+                            max-height: 70vh !important;
+                        }
+                        
+                        .image-upload-box {
+                            min-height: 60px !important;
+                            padding: 8px !important;
+                        }
+                        
+                        .image-upload-label i {
+                            font-size: 1rem !important;
+                            margin-bottom: 2px !important;
+                        }
+                        
+                        .image-upload-label span {
+                            font-size: 0.6rem !important;
+                        }
+                    }
+                    
+                    @media (max-width: 480px) {
+                        .star-rating label {
+                            font-size: 1.6rem;
+                        }
+                        
+                        .modal-body {
+                            max-height: 75vh !important;
+                            padding: 15px !important;
+                        }
+                        
+                        .image-upload-container .row .col-4 {
+                            margin-bottom: 8px;
+                        }
+                    }
+                    
+                    /* Image gallery styles */
+                    .rating-images {
+                        margin-top: 10px;
+                    }
+                    
+                    .rating-image-thumb {
+                        border: 2px solid #dee2e6;
+                        border-radius: 6px;
+                        transition: all 0.2s ease;
+                    }
+                    
+                    .rating-image-thumb:hover {
+                        border-color: #007bff;
+                        box-shadow: 0 2px 8px rgba(0,123,255,0.25);
+                    }
+                    
+                    /* Add visual feedback for selected rating */
+                    .star-rating.has-rating label {
+                        color: #ddd;
+                    }
+                    
+                    .star-rating.has-rating input[type="radio"]:checked ~ label {
+                        color: #ffc107;
+                    }
+                </style>
+            </xpath>
+        </template>
+
+        <!-- Add Write Review Button in Reviews Section -->
+        <template id="add_review_button" inherit_id="website_sale.product" name="Add Review Button" priority="95">
+            <xpath expr="//div[@id='wrap']" position="inside">
+                <t t-if="product.allow_anonymous_rating and request.env.user._is_public()">
+                    <script type="text/javascript">
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Create the button
+                            const button = document.createElement('div');
+                            button.className = 'text-center mt-2 mb-3';
+                            button.innerHTML = `
+                                &lt;style&gt;
+                                    .anonymous-review-btn {
+                                        transition: all 0.3s ease;
+                                    }
+                                    
+                                    @media (max-width: 768px) {
+                                        .anonymous-review-btn {
+                                            width: 100%;
+                                            font-size: 0.9rem;
+                                            padding: 12px 20px;
+                                        }
+                                    }
+                                    
+                                    @media (max-width: 480px) {
+                                        .anonymous-review-btn {
+                                            font-size: 0.85rem;
+                                            padding: 10px 15px;
+                                        }
+                                    }
+                                &lt;/style&gt;
+                                &lt;button class="btn btn-primary anonymous-review-btn" data-bs-toggle="modal" data-bs-target="#anonymousRatingModal"&gt;
+                                    &lt;i class="fa fa-edit me-2"&gt;&lt;/i&gt; Escribir Comentario
+                                &lt;/button&gt;
+                            `;
+                            
+                            // Try to find the best location to insert the button
+                            const targetSelectors = [
+                                '#discussion',
+                                '.o_portal_chatter_messages',
+                                '.o_message_counter',
+                                '.o_website_rating_avg',
+                                '[data-name="website_sale_rating"]',
+                                '.o_shop_discussion_rating',
+                                '#o_product_page_reviews_content'
+                            ];
+                            
+                            let inserted = false;
+                            for (const selector of targetSelectors) {
+                                const target = document.querySelector(selector);
+                                if (target &amp;&amp; !inserted) {
+                                    target.parentNode.insertBefore(button, target.nextSibling);
+                                    inserted = true;
+                                    break;
+                                }
+                            }
+                            
+                            if (!inserted) {
+                                const productDetails = document.querySelector('#product_details, .product-info, main .container');
+                                if (productDetails) {
+                                    productDetails.appendChild(button);
+                                }
+                            }
+                        });
+                    </script>
+                </t>
+            </xpath>
+        </template>
+
+        <!-- Include Anonymous Rating Modal and Functionality -->
+        <template id="product_page_anonymous_rating" inherit_id="website_sale.product" name="Product Page Anonymous Rating" priority="90">
+            <xpath expr="//div[@id='wrap']" position="inside">
+                <!-- Only show modal for anonymous users on products that allow anonymous rating -->
+                <t t-if="product.allow_anonymous_rating and request.env.user._is_public()" t-call="anonymous_product_rating.anonymous_rating_modal"/>
+                
+
+                
+                <!-- JavaScript for anonymous rating functionality -->
+                <t t-if="product.allow_anonymous_rating">
+                    <script type="text/javascript">
+                        // Anonymous rating functionality
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const form = document.getElementById('anonymous_rating_form');
+                            if (!form) return;
+                            
+                            // Initialize star rating functionality
+                            const starRating = document.querySelector('.star-rating');
+                            const starInputs = starRating.querySelectorAll('input[type="radio"]');
+                            const starLabels = starRating.querySelectorAll('label');
+                            
+                            // Add click handlers for stars
+                            starLabels.forEach(function(label, index) {
+                                label.addEventListener('click', function() {
+                                    starRating.classList.add('has-rating');
+                                    updateStarDisplay();
+                                });
+                            });
+                            
+                            // Add hover effects
+                            starLabels.forEach(function(label, index) {
+                                label.addEventListener('mouseenter', function() {
+                                    highlightStars(5 - index);
+                                });
+                                
+                                label.addEventListener('mouseleave', function() {
+                                    updateStarDisplay();
+                                });
+                            });
+                            
+                            function highlightStars(rating) {
+                                starLabels.forEach(function(label, index) {
+                                    if (5 - index &lt;= rating) {
+                                        label.style.color = '#ffc107';
+                                        label.style.transform = 'scale(1.1)';
+                                    } else {
+                                        label.style.color = '#ddd';
+                                        label.style.transform = 'scale(1)';
+                                    }
+                                });
+                            }
+                            
+                            function updateStarDisplay() {
+                                const checkedInput = starRating.querySelector('input[type="radio"]:checked');
+                                if (checkedInput) {
+                                    const rating = parseInt(checkedInput.value);
+                                    starLabels.forEach(function(label, index) {
+                                        if (5 - index &lt;= rating) {
+                                            label.style.color = '#ffc107';
+                                            label.style.transform = 'scale(1)';
+                                        } else {
+                                            label.style.color = '#ddd';
+                                            label.style.transform = 'scale(1)';
+                                        }
+                                    });
+                                } else {
+                                    starLabels.forEach(function(label) {
+                                        label.style.color = '#ddd';
+                                        label.style.transform = 'scale(1)';
+                                    });
+                                }
+                            }
+                            
+                            let isSubmitting = false;
+                            
+                            form.addEventListener('submit', async function(e) {
+                                e.preventDefault();
+                                
+                                if (isSubmitting) return;
+                                isSubmitting = true;
+                                
+                                const formData = new FormData(form);
+                                const submitBtn = document.getElementById('submit_rating_btn');
+                                const messageDiv = document.getElementById('rating_message');
+                                
+                                // Validate form
+                                const rating = formData.get('rating');
+                                const authorName = formData.get('author_name');
+                                
+                                if (!rating) {
+                                    showMessage('Please select a star rating (1-5 stars)', 'error');
+                                    isSubmitting = false;
+                                    return;
+                                }
+                                
+                                if (!authorName || authorName.trim().length === 0) {
+                                    showMessage('Please enter your name', 'error');
+                                    isSubmitting = false;
+                                    return;
+                                }
+                                
+                                // Show loading state
+                                submitBtn.disabled = true;
+                                submitBtn.innerHTML = '&lt;span class="spinner-border spinner-border-sm me-2"&gt;&lt;/span&gt;Submitting...';
+                                
+                                try {
+                                    const response = await fetch('/shop/product/anonymous_rating/submit_with_images', {
+                                        method: 'POST',
+                                        body: formData
+                                    });
+                                    
+                                    const data = await response.json();
+                                    
+                                    if (data.success) {
+                                        showMessage('Thank you! Your review has been submitted successfully.', 'success');
+                                        form.reset();
+                                        clearImagePreviews();
+                                        
+                                        // Close modal after 2 seconds
+                                        setTimeout(function() {
+                                            const modal = document.getElementById('anonymousRatingModal');
+                                            const closeBtn = modal.querySelector('[data-bs-dismiss="modal"]');
+                                            if (closeBtn) closeBtn.click();
+                                            
+                                            // Reload page to show new rating
+                                            setTimeout(function() { location.reload(); }, 500);
+                                        }, 2000);
+                                    } else {
+                                        showMessage(data.error || 'Failed to submit review. Please try again.', 'error');
+                                    }
+                                } catch (error) {
+                                    showMessage('Network error. Please check your connection and try again.', 'error');
+                                } finally {
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML = 'Submit Review';
+                                    isSubmitting = false;
+                                }
+                            });
+                            
+                            // Image handling functions
+                            function initializeImageHandlers() {
+                                const imageInputs = document.querySelectorAll('input[type="file"][name^="image_"]');
+                                imageInputs.forEach(function(input) {
+                                    input.addEventListener('change', handleImageChange);
+                                });
+                                
+                                const removeButtons = document.querySelectorAll('.remove-image');
+                                removeButtons.forEach(function(button) {
+                                    button.addEventListener('click', handleImageRemove);
+                                });
+                            }
+                            
+                            function handleImageChange(event) {
+                                const input = event.target;
+                                const file = input.files[0];
+                                const previewId = input.id.replace('image', 'preview');
+                                const preview = document.getElementById(previewId);
+                                const uploadBox = input.closest('.image-upload-box');
+                                
+                                if (file) {
+                                    // Validate file
+                                    if (!validateImageFile(file)) {
+                                        input.value = '';
+                                        return;
+                                    }
+                                    
+                                    // Show preview
+                                    const reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        preview.innerHTML = `
+                                            &lt;img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover;"/&gt;
+                                            &lt;button type="button" class="remove-image" style="position: absolute; top: 5px; right: 5px; background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer;"&gt;
+                                                &lt;i class="fa fa-times" style="font-size: 0.7rem;"&gt;&lt;/i&gt;
+                                            &lt;/button&gt;
+                                        `;
+                                        preview.style.display = 'block';
+                                        uploadBox.querySelector('.image-upload-label').style.display = 'none';
+                                        
+                                        // Re-attach remove handler
+                                        preview.querySelector('.remove-image').addEventListener('click', handleImageRemove);
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            }
+                            
+                            function handleImageRemove(event) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                
+                                const button = event.target.closest('.remove-image');
+                                const preview = button.closest('.image-preview');
+                                const uploadBox = button.closest('.image-upload-box');
+                                const input = uploadBox.querySelector('input[type="file"]');
+                                
+                                // Clear input and preview
+                                input.value = '';
+                                preview.innerHTML = '';
+                                preview.style.display = 'none';
+                                uploadBox.querySelector('.image-upload-label').style.display = 'flex';
+                            }
+                            
+                            function validateImageFile(file) {
+                                // Check file size (5MB max)
+                                const maxSize = 5 * 1024 * 1024;
+                                if (file.size > maxSize) {
+                                    showMessage('Image file is too large. Maximum size is 5MB.', 'error');
+                                    return false;
+                                }
+                                
+                                // Check file type
+                                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+                                if (!allowedTypes.includes(file.type)) {
+                                    showMessage('Invalid file type. Please select a valid image (JPG, PNG, GIF, WebP).', 'error');
+                                    return false;
+                                }
+                                
+                                return true;
+                            }
+                            
+                            function clearImagePreviews() {
+                                const previews = document.querySelectorAll('.image-preview');
+                                previews.forEach(function(preview) {
+                                    preview.innerHTML = '';
+                                    preview.style.display = 'none';
+                                });
+                                
+                                const labels = document.querySelectorAll('.image-upload-label');
+                                labels.forEach(function(label) {
+                                    label.style.display = 'flex';
+                                });
+                            }
+                            
+                            // Initialize image handlers
+                            initializeImageHandlers();
+                            
+                            function showMessage(message, type) {
+                                const messageDiv = document.getElementById('rating_message');
+                                if (messageDiv) {
+                                    messageDiv.className = `alert alert-${type === 'error' ? 'danger' : 'success'}`;
+                                    messageDiv.textContent = message;
+                                    messageDiv.style.display = 'block';
+                                    
+                                    if (type === 'error') {
+                                        setTimeout(function() {
+                                            messageDiv.style.display = 'none';
+                                        }, 5000);
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                    
+                    <!-- Load and display anonymous ratings for all users -->
+                    <script type="text/javascript">
+                        // Load anonymous ratings
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const productId = '<t t-esc="product.id"/>';
+                            loadAnonymousRatings(productId);
+                        });
+                        
+                        function generateImageGallery(rating) {
+                            let imagesHTML = '&lt;div class="rating-images mt-2"&gt;&lt;div class="row"&gt;';
+                            
+                            for (let i = 1; i &lt;= 3; i++) {
+                                const smallImage = rating[`image_${i}_small`];
+                                const fullImage = rating[`image_${i}`];
+                                
+                                if (smallImage) {
+                                    imagesHTML += `
+                                        &lt;div class="col-auto"&gt;
+                                            &lt;img src="data:image/png;base64,${smallImage}" 
+                                                 class="rating-image-thumb img-thumbnail" 
+                                                 alt="Review image ${i}"
+                                                 onclick="showImageModal('data:image/png;base64,${fullImage}', 'Review image ${i}')"
+                                                 style="width: 60px; height: 60px; object-fit: cover; cursor: pointer; transition: transform 0.2s ease;"
+                                                 onmouseover="this.style.transform='scale(1.05)'"
+                                                 onmouseout="this.style.transform='scale(1)'"/&gt;
+                                        &lt;/div&gt;
+                                    `;
+                                }
+                            }
+                            
+                            imagesHTML += '&lt;/div&gt;&lt;/div&gt;';
+                            return imagesHTML;
+                        }
+                        
+                        function showImageModal(imageSrc, imageAlt) {
+                            // Create a simple overlay modal without Bootstrap JS dependency
+                            const modalHTML = `
+                                &lt;div id="imageViewModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;"&gt;
+                                    &lt;div style="position: relative; max-width: 90%; max-height: 90%; background: white; border-radius: 8px; overflow: hidden;"&gt;
+                                        &lt;div style="padding: 15px; border-bottom: 1px solid #dee2e6; display: flex; justify-content: space-between; align-items: center;"&gt;
+                                            &lt;h5 style="margin: 0; color: #333;"&gt;${imageAlt}&lt;/h5&gt;
+                                            &lt;button onclick="closeImageModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666;"&gt;&amp;times;&lt;/button&gt;
+                                        &lt;/div&gt;
+                                        &lt;div style="padding: 20px; text-align: center;"&gt;
+                                            &lt;img src="${imageSrc}" style="max-width: 100%; max-height: 70vh; object-fit: contain;" alt="${imageAlt}"/&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            `;
+                            
+                            // Remove existing modal if any
+                            const existingModal = document.getElementById('imageViewModal');
+                            if (existingModal) {
+                                existingModal.remove();
+                            }
+                            
+                            // Add modal to body
+                            document.body.insertAdjacentHTML('beforeend', modalHTML);
+                            
+                            // Add fade-in animation
+                            const modal = document.getElementById('imageViewModal');
+                            modal.style.opacity = '0';
+                            modal.style.transition = 'opacity 0.2s ease';
+                            setTimeout(() => {
+                                modal.style.opacity = '1';
+                            }, 10);
+                            
+                            // Add click outside to close
+                            modal.addEventListener('click', function(e) {
+                                if (e.target === this) {
+                                    closeImageModal();
+                                }
+                            });
+                            
+                            // Add escape key to close
+                            document.addEventListener('keydown', function escapeHandler(e) {
+                                if (e.key === 'Escape') {
+                                    closeImageModal();
+                                    document.removeEventListener('keydown', escapeHandler);
+                                }
+                            });
+                        }
+                        
+                        // Make closeImageModal globally available
+                        window.closeImageModal = function() {
+                            const modal = document.getElementById('imageViewModal');
+                            if (modal) {
+                                modal.style.opacity = '0';
+                                setTimeout(() => {
+                                    modal.remove();
+                                }, 200);
+                            }
+                        }
+                        
+                        function loadAnonymousRatings(productId) {
+                            fetch(`/shop/product/${productId}/anonymous_ratings_with_images`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                },
+                                body: JSON.stringify({
+                                    jsonrpc: '2.0',
+                                    method: 'call',
+                                    params: { page: 1, limit: 10 },
+                                    id: Math.floor(Math.random() * 1000000)
+                                })
+                            })
+                            .then(function(response) { return response.json(); })
+                            .then(function(data) {
+                                if (data.result &amp;&amp; data.result.success &amp;&amp; data.result.ratings.length > 0) {
+                                    displayAnonymousRatings(data.result.ratings);
+                                }
+                            })
+                            .catch(function(error) {
+                                console.warn('Failed to load anonymous ratings:', error);
+                            });
+                        }
+                        
+                        function displayAnonymousRatings(ratings) {
+                            const targetSelectors = [
+                                '#discussion .o_portal_chatter_messages',
+                                '#discussion',
+                                '#o_product_page_reviews_content',
+                                '.o_shop_discussion_rating',
+                                '.accordion-body',
+                                '.tab-content'
+                            ];
+                            
+                            let targetElement = null;
+                            for (const selector of targetSelectors) {
+                                targetElement = document.querySelector(selector);
+                                if (targetElement) break;
+                            }
+                            
+                            if (!targetElement) return;
+                            
+                            // If we're inserting into the chatter container, wrap in proper structure
+                            if (targetElement.id === 'discussion' || targetElement.classList.contains('o_portal_chatter_messages')) {
+                                ratingsHTML = '&lt;div class="o_portal_chatter_messages"&gt;' + ratingsHTML + '&lt;/div&gt;';
+                            }
+                            
+                            var ratingsHTML = '';
+                            
+                            for (var i = 0; i &lt; ratings.length; i++) {
+                                var rating = ratings[i];
+                                var stars = '';
+                                for (var j = 0; j &lt; Math.floor(rating.rating); j++) {
+                                    stars += '&lt;i class="fa fa-star text-warning" role="img"&gt;&lt;/i&gt;';
+                                }
+                                for (var k = 0; k &lt; (5 - Math.floor(rating.rating)); k++) {
+                                    stars += '&lt;i class="fa fa-star-o text-muted" role="img"&gt;&lt;/i&gt;';
+                                }
+                                
+                                var dateObj = new Date(rating.create_date);
+                                var dateStr = dateObj.toLocaleDateString('es-ES', { 
+                                    day: '2-digit', 
+                                    month: '2-digit', 
+                                    year: 'numeric' 
+                                }) + ' ' + dateObj.toLocaleTimeString('es-ES', { 
+                                    hour: '2-digit', 
+                                    minute: '2-digit' 
+                                });
+                                
+                                ratingsHTML += '&lt;div class="d-flex o_portal_chatter_message mb-4"&gt;' +
+                                    '&lt;img class="o_avatar o_portal_chatter_avatar rounded me-3" ' +
+                                         'src="/web/static/img/user_menu_avatar.png" ' +
+                                         'alt="' + rating.author_name + '"&gt;' +
+                                    '&lt;div class="flex-grow-1"&gt;' +
+                                        '&lt;div class="o_portal_chatter_message_title"&gt;' +
+                                            '&lt;h5 class="mb-1"&gt;' + rating.author_name + '&lt;/h5&gt;' +
+                                            '&lt;p class="o_portal_chatter_puslished_date"&gt;Publicado el ' + dateStr + '&lt;/p&gt;' +
+                                        '&lt;/div&gt;' +
+                                        '&lt;div class="o_website_rating_static mb-2"&gt;' + stars + '&lt;/div&gt;' +
+                                        (rating.feedback ? '&lt;p&gt;' + rating.feedback + '&lt;/p&gt;' : '') +
+                                        (rating.has_images ? generateImageGallery(rating) : '') +
+                                    '&lt;/div&gt;' +
+                                '&lt;/div&gt;';
+                            }
+                            
+                            targetElement.insertAdjacentHTML('afterend', ratingsHTML);
+                        }
+                    </script>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

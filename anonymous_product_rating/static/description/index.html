@@ -1,0 +1,200 @@
+<!-- ============================================================
+     Anonymous Product Rating - Odoo Apps description page
+     Built from the official Odoo Apps template (oe_container).
+     ============================================================ -->
+
+<!-- HEADER -->
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan" style="color:#875A7B;">Anonymous Product Rating</h2>
+            <h3 class="oe_slogan">Let anonymous visitors rate and review your products &mdash; securely, without an account.</h3>
+            <div class="oe_centeralign oe_mt16">
+                <span class="label label-primary">Odoo 17</span>
+                <span class="label label-success">Community</span>
+                <span class="label label-info">Website eCommerce</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <div class="oe_demo oe_picture oe_screenshot">
+                <img src="banner.png" alt="Anonymous Product Rating cover"/>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <p class="oe_mt32" style="text-align: justify;">
+                The <b>Anonymous Product Rating</b> module lets non-logged-in visitors rate and
+                review products directly on your Odoo website &mdash; no registration required.
+                It was built for stores that want social proof and customer feedback without
+                forcing visitors to create an account.
+            </p>
+            <p style="text-align: justify;">
+                Anonymous ratings are stored in a dedicated model, kept separate from Odoo's core
+                rating system, and then merged with registered-user ratings into a single unified
+                rating display. The module ships with strong bot protection: reCAPTCHA v3
+                integration, multi-layer rate limiting, spam detection, content sanitization and
+                request validation &mdash; so your ratings stay genuine and your site stays safe.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- KEY FEATURES -->
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced oe_mt32">
+        <h2 class="oe_slogan">Key Features</h2>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-star-o" style="margin-right:6px;"></i> Anonymous Rating System
+            </h4>
+            <p style="text-align: justify;">
+                Visitors rate products (1&ndash;5 stars) and optionally leave a review, without
+                creating an account.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-exchange" style="margin-right:6px;"></i> Unified Rating Display
+            </h4>
+            <p style="text-align: justify;">
+                Combines anonymous and registered-user ratings into one average and count, shown
+                across your whole shop.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-shield" style="margin-right:6px;"></i> Bot &amp; Spam Protection
+            </h4>
+            <p style="text-align: justify;">
+                reCAPTCHA v3 score validation, user-agent analysis and pattern-based spam
+                detection.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-clock-o" style="margin-right:6px;"></i> Multi-Layer Rate Limiting
+            </h4>
+            <p style="text-align: justify;">
+                Per-IP, per-name and per-email submission limits with configurable time windows.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-check-circle-o" style="margin-right:6px;"></i> Flexible Moderation
+            </h4>
+            <p style="text-align: justify;">
+                Auto-publish ratings or review each submission manually; bulk approve/reject from
+                the backend.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-picture-o" style="margin-right:6px;"></i> Review Images
+            </h4>
+            <p style="text-align: justify;">
+                Visitors can attach up to 3 images to their review, with automatic thumbnail
+                generation.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-lock" style="margin-right:6px;"></i> Content Security
+            </h4>
+            <p style="text-align: justify;">
+                XSS sanitization, script injection filtering, character limits and input
+                validation on every request.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h4 style="color:#875A7B;">
+                <i class="fa fa-bar-chart" style="margin-right:6px;"></i> Monitoring &amp; Analytics
+            </h4>
+            <p style="text-align: justify;">
+                Performance monitor transients, moderation statistics, security incident logging
+                and health endpoints.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- INSTALLATION -->
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Installation &amp; Configuration</h2>
+        </div>
+        <div class="oe_span12">
+            <p class="oe_mt32">To install this module, you simply need to:</p>
+            <ul class="oe_mt32">
+                <li>Copy the <code>anonymous_product_rating</code> folder into your Odoo addons directory.</li>
+                <li>Update the Apps list in Odoo (Developer mode &rarr; Update Apps List).</li>
+                <li>Install the <b>Anonymous Product Rating</b> app. It depends on <code>website_sale</code> and <code>rating</code>.</li>
+                <li>Go to <b>Website &rarr; Configuration &rarr; Settings</b> to configure auto-publish, rate limits and moderation.</li>
+                <li>(Optional) Configure reCAPTCHA v3 keys under <b>General Settings &rarr; reCAPTCHA</b> for stronger bot protection.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!--
+    ============================================================
+    SCREENSHOTS
+    ------------------------------------------------------------
+    Add your own captures to static/description/ and uncomment
+    this section before submitting to the Odoo Apps store.
+    Recommended captures:
+      1. Product page showing the rating widget and reviews
+      2. The anonymous rating form modal
+      3. Backend moderation list (Website > Anonymous Ratings)
+    Use local files only and descriptive alt texts.
+    ============================================================
+    <section class="oe_container oe_dark">
+        <div class="oe_row oe_spaced oe_mt32">
+            <h2 class="oe_slogan">Screenshots</h2>
+            <div class="oe_span6">
+                <div class="oe_row_img oe_centered">
+                    <img class="oe_picture oe_screenshot" src="screenshot_1.png" alt="Product page rating widget"/>
+                </div>
+            </div>
+            <div class="oe_span6">
+                <div class="oe_row_img oe_centered">
+                    <img class="oe_picture oe_screenshot" src="screenshot_2.png" alt="Rating form modal"/>
+                </div>
+            </div>
+            <div class="oe_span12">
+                <div class="oe_row_img oe_centered">
+                    <img class="oe_picture oe_screenshot" src="screenshot_3.png" alt="Backend moderation list"/>
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+<!-- SUPPORT -->
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Help &amp; Support</h2>
+            <h3 class="oe_slogan">Get immediate support for any of your queries</h3>
+            <div class="oe_centeralign">
+                <a href="mailto:isidororoa@softtechlatam.cl" class="oe_button oe_big oe_tacky">Write To Us</a>
+            </div>
+            <p class="oe_mt32 oe_centeralign">
+                <i class="fa fa-envelope-o" style="margin-right:4px;"></i>
+                isidororoa@softtechlatam.cl
+            </p>
+            <p class="oe_centeralign">
+                <i class="fa fa-globe" style="margin-right:4px;"></i>
+                SoftTech Latam &bull; www.softtechlatam.cl
+            </p>
+            <p class="oe_centeralign" style="color:#777; font-size:14px;">
+                Any queries, bug reports or requests for extra features? Just drop a mail to our support.
+            </p>
+        </div>
+    </div>
+</section>
