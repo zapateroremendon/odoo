@@ -7,6 +7,7 @@
     'description': 'Anonymous Product Rating - Allow anonymous users to rate and comment on products with bot protection',
     'author': 'Isidoro Roa Saavedra',
     'website': 'https://www.softtechlatam.cl',
+    'live_test_url':'https://www.softtechlatam.cl/probar-gratis'
     'depends': [
         'website_sale',
         'rating',
@@ -35,7 +36,7 @@
     },
     'installable': True,
     'auto_install': False,
-    'application': False,
+    'application': True,
     'license': 'LGPL-3',
     'post_init_hook': 'post_init_hook',
 }
